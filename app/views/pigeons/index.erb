@@ -1,9 +1,53 @@
 <%= erb :'layouts/_header' %>
-
+  
   <h1>Pigeons</h1>
-  
-  <!-- show a table that lists all pigeons here -->
 
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Color</th>
+        <th>Gender</th>
+        <th>Lives</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%Pigeon.all.each do |p|%>
+      <tr>
+        <td><%=p.name%></td>
+        <td><%=p.color%></td>
+        <td><%=p.gender%></td>
+        <td><%=p.lives%></td>
+
+        <td>
+          <form action="/pigeons/<%=p.id%>" method="GET">
+            <input type="submit" value="Show" />
+          </form>
+        </td>
+
+        <td>
+          <form action="/pigeons/<%=p.id%>/edit" method="GET">
+            <input type="submit" value="Edit" />
+          </form>
+        </td>
+
+        <td>
+          <form action="/pigeons/<%=p.id%>" method="POST">
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type="submit" value="Destroy" />
+          </form>
+        </td>
+      </tr><tr>
+      </tr>  
+
+    <%end%>
+    </tbody>
+  </table>      
   <a class="button" href="/pigeons/new">New Pigeon</a>
-  
 <%= erb :'layouts/_footer' %>
+
+   
